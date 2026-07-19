@@ -5,6 +5,9 @@
   "description": "An animated time-machine through 60 years of U.S. Treasury yield curves.",
   "type": "module",
   "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc --noEmit && vite build",
