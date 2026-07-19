@@ -16,24 +16,24 @@ colors instead.
 
 ## Tokens
 
-| Token | Value | Use |
-|---|---|---|
-| `--bg` | `#f6f1e7` | page background — warm newsprint, not pure white |
-| `--surface-1` | `#fffdf7` | the chart card / raised panel |
-| `--surface-2` | `#ece4d3` | scrubber track, secondary panels |
-| `--ink` | `#231f1a` | primary text, axis lines, curve stroke (normal) |
-| `--ink-muted` | `#6b6255` | captions, tick labels, helper text |
-| `--accent-inverted` | `#b23a2f` | curve stroke + badge while inverted (rust red) |
-| `--accent-normal` | `#2f5d8a` | curve stroke while normal (steel blue) |
-| `--accent-recession` | `#c9a13b` | recession-band fill, low opacity (dulled gold) |
-| `--danger` | `#b23a2f` | shared with `--accent-inverted` — inversion IS the danger state |
-| `--success` | `#3c7a52` | reserved for confirmations (e.g. copied-link toast) |
-| Display font | "Source Serif 4" (Google Fonts), fallback `Georgia, "Times New Roman", serif` | wordmark, big date/year readout, section headings |
-| UI font | "Inter" (Google Fonts), fallback `system-ui, sans-serif` | slider labels, tick labels, body copy, controls |
-| Spacing unit | 8px scale (8/16/24/32/48/64) | all layout spacing |
-| Corner radius | 6px controls, 12px cards | consistent rounding, never sharp AND never pill-shaped |
-| Shadow | `0 1px 2px rgba(35,31,26,0.06), 0 8px 24px rgba(35,31,26,0.08)` | soft paper-lift, no glow |
-| Motion | UI transitions 150–200ms ease-out; curve redraw tween 180ms ease-out; recession band fade-in 220ms | calm, not snappy-tech |
+| Token                | Value                                                                                              | Use                                                             |
+| -------------------- | -------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
+| `--bg`               | `#f6f1e7`                                                                                          | page background — warm newsprint, not pure white                |
+| `--surface-1`        | `#fffdf7`                                                                                          | the chart card / raised panel                                   |
+| `--surface-2`        | `#ece4d3`                                                                                          | scrubber track, secondary panels                                |
+| `--ink`              | `#231f1a`                                                                                          | primary text, axis lines, curve stroke (normal)                 |
+| `--ink-muted`        | `#6b6255`                                                                                          | captions, tick labels, helper text                              |
+| `--accent-inverted`  | `#b23a2f`                                                                                          | curve stroke + badge while inverted (rust red)                  |
+| `--accent-normal`    | `#2f5d8a`                                                                                          | curve stroke while normal (steel blue)                          |
+| `--accent-recession` | `#c9a13b`                                                                                          | recession-band fill, low opacity (dulled gold)                  |
+| `--danger`           | `#b23a2f`                                                                                          | shared with `--accent-inverted` — inversion IS the danger state |
+| `--success`          | `#3c7a52`                                                                                          | reserved for confirmations (e.g. copied-link toast)             |
+| Display font         | "Source Serif 4" (Google Fonts), fallback `Georgia, "Times New Roman", serif`                      | wordmark, big date/year readout, section headings               |
+| UI font              | "Inter" (Google Fonts), fallback `system-ui, sans-serif`                                           | slider labels, tick labels, body copy, controls                 |
+| Spacing unit         | 8px scale (8/16/24/32/48/64)                                                                       | all layout spacing                                              |
+| Corner radius        | 6px controls, 12px cards                                                                           | consistent rounding, never sharp AND never pill-shaped          |
+| Shadow               | `0 1px 2px rgba(35,31,26,0.06), 0 8px 24px rgba(35,31,26,0.08)`                                    | soft paper-lift, no glow                                        |
+| Motion               | UI transitions 150–200ms ease-out; curve redraw tween 180ms ease-out; recession band fade-in 220ms | calm, not snappy-tech                                           |
 
 ## Layout intent
 

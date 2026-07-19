@@ -7,7 +7,7 @@ one of the most reliable recession leading indicators in modern economic history
 recession since the 1960s was preceded by one. But the concept lives entirely in
 financial-media shorthand: a headline says "the curve inverted" and a static line chart
 gets embedded, and the reader either already knows what that means or bounces off it.
-Nothing in the standard presentation lets a newcomer *watch* the phenomenon happen and
+Nothing in the standard presentation lets a newcomer _watch_ the phenomenon happen and
 connect it, viscerally, to what followed.
 
 ## Who it's for
@@ -20,11 +20,11 @@ about 20 seconds unless it immediately rewards attention.
 ## The core idea
 
 Treat 60+ years of Treasury yield curves as a single scrubbable animation instead of 60
-years of separate snapshots. Put a slider under a chart that always draws the *shape*
+years of separate snapshots. Put a slider under a chart that always draws the _shape_
 of the curve — yield vs. maturity, 3 months out to 30 years — and let dragging the
 slider through time animate that shape smoothly. When the short end lifts above the
 long end, the line visibly bends backward instead of monotonically rising: an
-inversion isn't described, it's *seen*. A translucent band then slides in over the
+inversion isn't described, it's _seen_. A translucent band then slides in over the
 chart's timeline scrubber 6–18 months after each inversion is detected, marking the
 recession that followed, so cause and effect sit in the same frame.
 

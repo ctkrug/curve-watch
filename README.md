@@ -7,7 +7,7 @@ after each inversion.
 
 Yield curve inversions are one of the most reliable recession signals in modern
 economic history, but almost everyone who has heard the phrase "inverted yield curve"
-has never actually *seen* one happen. Curve Watch turns a wonky bond-market chart into
+has never actually _seen_ one happen. Curve Watch turns a wonky bond-market chart into
 something you can feel: scrub the timeline and the short end of the curve visibly
 climbs above the long end, then watch the recession band slide in right on schedule.
 

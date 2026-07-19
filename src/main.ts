@@ -19,7 +19,11 @@ function renderLatestCurve(observation: YieldObservation): HTMLElement | SVGSVGE
     x: { type: "log", label: "Maturity (months)" },
     y: { label: "Yield (%)" },
     marks: [
-      Plot.line(points, { x: "months", y: "yield", stroke: isInverted(observation) ? "#b23a2f" : "#2f6fb2" }),
+      Plot.line(points, {
+        x: "months",
+        y: "yield",
+        stroke: isInverted(observation) ? "#b23a2f" : "#2f6fb2",
+      }),
       Plot.dot(points, { x: "months", y: "yield" }),
     ],
   });

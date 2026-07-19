@@ -6,7 +6,7 @@ are meant to be concretely verifiable by a later BUILD/QA run, not vibes.
 ## Epic 1 — The scrubbable curve (the wow moment)
 
 - [ ] **1. Scrubbable year/month slider animates the full yield curve in real time**
-      *(This is the wow moment — build everything else around this landing first.)*
+      _(This is the wow moment — build everything else around this landing first.)_
   - Dragging the slider across its full range (earliest data → present) redraws the
     curve on every frame with no visible stutter (sampled at ≥30fps during a drag).
   - The slider's range endpoints are reachable and correspond exactly to the earliest
