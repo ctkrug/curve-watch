@@ -1,10 +1,12 @@
 import { describe, expect, it } from "vitest";
 import {
   formatObservationMonth,
+  clampObservationIndex,
   inversionSpans,
   isInverted,
   spread,
   type YieldObservation,
+  visibleRecessions,
 } from "./yieldCurve";
 
 function obs(date: string, threeMonth: number | null, tenYear: number | null): YieldObservation {
@@ -79,5 +81,34 @@ describe("inversionSpans", () => {
   it("returns no spans when the curve never inverts", () => {
     const observations = [obs("2015-01-01", 0.05, 2.1), obs("2015-02-01", 0.06, 2.2)];
     expect(inversionSpans(observations)).toEqual([]);
+  });
+});
+
+describe("visibleRecessions", () => {
+  const periods = [
+    { start: "2001-03-01", end: "2001-11-01" },
+    { start: "2007-12-01", end: "2009-06-01" },
+  ];
+
+  it("does not reveal a recession before its start", () => {
+    expect(visibleRecessions(periods, "2001-02-01")).toEqual([]);
+  });
+
+  it("reveals each period as its start month is reached", () => {
+    expect(visibleRecessions(periods, "2007-12-01")).toEqual(periods);
+  });
+});
+
+describe("clampObservationIndex", () => {
+  const observations = [obs("2000-01-01", 1, 2), obs("2000-02-01", 1, 2)];
+
+  it("clamps negative, fractional, and oversized indices", () => {
+    expect(clampObservationIndex(-4, observations)).toBe(0);
+    expect(clampObservationIndex(0.6, observations)).toBe(1);
+    expect(clampObservationIndex(20, observations)).toBe(1);
+  });
+
+  it("uses zero for an empty timeline", () => {
+    expect(clampObservationIndex(3, [])).toBe(0);
   });
 });
