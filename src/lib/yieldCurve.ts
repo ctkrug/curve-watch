@@ -48,6 +48,18 @@ export function spread(observation: YieldObservation): number | null {
   return long - short;
 }
 
+/** Formats one yield for the point-in-time tenor table. */
+export function formatYield(yieldRate: number | null): string {
+  if (yieldRate == null || !Number.isFinite(yieldRate)) return "—";
+  return `${yieldRate.toFixed(2)}%`;
+}
+
+/** Converts a tenor in months into the concise label used in the reader-facing UI. */
+export function formatTenor(months: TenorMonths): string {
+  if (months < 12) return `${months}M`;
+  return `${months / 12}Y`;
+}
+
 /** Collapses consecutive inverted months into contiguous [start, end] date ranges. */
 export function inversionSpans(observations: YieldObservation[]): RecessionPeriod[] {
   const spans: RecessionPeriod[] = [];
