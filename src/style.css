@@ -5,6 +5,13 @@
 body { margin:0; min-width:320px; min-height:100vh; color:var(--ink); font-family:Inter,system-ui,sans-serif; background:radial-gradient(rgb(35 31 26 / .035) .75px,transparent .75px) 0 0/5px 5px,var(--bg); }
 button,input { font:inherit; }
 .page-shell { width:min(1160px,100%); min-height:100vh; margin:auto; padding:32px 32px 48px; display:grid; align-content:center; gap:32px; }
+.startup-state { width:min(680px,calc(100% - 32px)); min-height:100vh; margin:auto; padding:clamp(32px,10vw,96px) 0; display:grid; align-content:center; gap:16px; }
+.startup-state h1 { max-width:18ch; font-size:clamp(2.25rem,6vw,4.5rem); }
+.startup-state > p:last-of-type { max-width:52ch; margin:0; color:var(--ink-muted); line-height:1.6; }
+.startup-state a { width:max-content; min-height:44px; padding:12px 16px; border:1px solid var(--ink); border-radius:6px; color:var(--surface-1); background:var(--ink); font-size:.84rem; font-weight:700; text-decoration:none; transition:transform .15s ease-out,background .15s ease-out; }
+.startup-state a:hover { background:var(--accent-normal); transform:translateY(-2px); }
+.startup-state a:active { transform:translateY(1px) scale(.98); }
+.startup-state a:focus-visible { outline:3px solid rgb(47 93 138 / .4); outline-offset:3px; }
 .masthead { display:flex; align-items:flex-end; justify-content:space-between; gap:24px; border-bottom:1px solid rgb(35 31 26 / .16); padding-bottom:16px; }
 .wordmark { position:relative; display:inline-block; color:var(--ink); font:700 clamp(2rem,4vw,3.5rem)/.9 "Source Serif 4",Georgia,serif; letter-spacing:-.07em; text-decoration:none; }
 .wordmark em { font-style:normal; color:var(--accent-normal); }
