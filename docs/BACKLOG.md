@@ -48,24 +48,24 @@ are meant to be concretely verifiable by a later BUILD/QA run, not vibes.
 
 ## Epic 2 — Point-in-time detail and storytelling
 
-- [ ] **7. Hover/scrub point-in-time readout panel**
+- [x] **7. Hover/scrub point-in-time readout panel**
   - Hovering or scrubbing to any date updates a readout panel with that month's
     exact yield for every tracked tenor.
   - Tenors with no data at the selected date show an explicit placeholder (e.g. "—"),
     never a stale value carried over from the previous month.
 
-- [ ] **8. Inversion + recession annotation list**
+- [x] **8. Inversion + recession annotation list**
   - A list of every historical inversion period and the recession (if any) that
     followed it is generated programmatically from the data, not hand-typed.
   - Clicking an entry jumps the slider directly to that period's start date.
 
-- [ ] **9. Persistent 10Y–3M spread mini-chart**
+- [x] **9. Persistent 10Y–3M spread mini-chart**
   - A small chart of the 10Y-minus-3M spread across the full history renders
     alongside the main curve, with a marker showing the slider's current position.
   - The mini-chart's zero line is visually distinct so a viewer can see exactly
     where the spread crosses from positive to negative.
 
-- [ ] **10. Design polish pass — Epic 2**
+- [x] **10. Design polish pass — Epic 2**
   - The readout panel, annotation list, and mini-chart match `docs/DESIGN.md`
     tokens and its phone-width stacked layout.
   - Every interactive list entry has a themed hover and focus state — no unstyled
