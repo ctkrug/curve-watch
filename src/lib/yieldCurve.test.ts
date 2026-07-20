@@ -1,5 +1,11 @@
 import { describe, expect, it } from "vitest";
-import { inversionSpans, isInverted, spread, type YieldObservation } from "./yieldCurve";
+import {
+  formatObservationMonth,
+  inversionSpans,
+  isInverted,
+  spread,
+  type YieldObservation,
+} from "./yieldCurve";
 
 function obs(date: string, threeMonth: number | null, tenYear: number | null): YieldObservation {
   return {
@@ -31,6 +37,16 @@ describe("isInverted", () => {
 
   it("is false when either tenor is missing", () => {
     expect(isInverted(obs("1972-01-01", null, 6.0))).toBe(false);
+  });
+});
+
+describe("formatObservationMonth", () => {
+  it("formats a valid monthly observation in UTC", () => {
+    expect(formatObservationMonth("2023-06-01")).toBe("Jun 2023");
+  });
+
+  it("rejects malformed dates instead of presenting a misleading label", () => {
+    expect(() => formatObservationMonth("June 2023")).toThrow("Invalid observation date");
   });
 });
 
