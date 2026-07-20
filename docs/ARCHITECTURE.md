@@ -17,6 +17,7 @@ bundle and does not make runtime network requests.
   timeline.
 - `src/style.css` implements the editorial serif design system and responsive layout.
 - `src/lib/staticDeploy.ts` holds the pure subpath-asset validation used by tests.
+- `src/lib/startup.ts` creates the recoverable unavailable-data state for the app shell.
 - `scripts/verify-static-build.mjs` serves `dist/` below `/curve-watch/` and requests
   the built document assets as a deployment smoke check.
 
