@@ -3,6 +3,7 @@ import {
   formatObservationMonth,
   formatTenor,
   formatYield,
+  inversionAnnotations,
   clampObservationIndex,
   inversionSpans,
   isInverted,
@@ -98,6 +99,26 @@ describe("inversionSpans", () => {
   it("returns no spans when the curve never inverts", () => {
     const observations = [obs("2015-01-01", 0.05, 2.1), obs("2015-02-01", 0.06, 2.2)];
     expect(inversionSpans(observations)).toEqual([]);
+  });
+});
+
+describe("inversionAnnotations", () => {
+  it("links an inversion to the first recession that follows it", () => {
+    const observations = [
+      obs("2006-06-01", 5.1, 5),
+      obs("2006-07-01", 4.8, 5),
+      obs("2006-08-01", 4.7, 5),
+    ];
+    const recessions = [{ start: "2007-12-01", end: "2009-06-01" }];
+    expect(inversionAnnotations(observations, recessions)).toEqual([
+      { start: "2006-06-01", end: "2006-07-01", recession: recessions[0] },
+    ]);
+  });
+
+  it("keeps an inversion visible when no later recession exists", () => {
+    expect(inversionAnnotations([obs("2023-06-01", 5.2, 3.8)], [])).toEqual([
+      { start: "2023-06-01", end: "2023-06-01", recession: null },
+    ]);
   });
 });
 
