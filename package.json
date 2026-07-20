@@ -11,6 +11,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc --noEmit && vite build",
+    "verify:static": "node scripts/verify-static-build.mjs",
     "preview": "vite preview",
     "bake:data": "node scripts/bake-yield-data.mjs",
     "test": "vitest run",
