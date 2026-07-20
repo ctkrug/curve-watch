@@ -56,6 +56,10 @@ app.innerHTML = `
         <p>Each period is detected from the 3-month and 10-year rates. Select one to revisit its first inverted month.</p>
         <ol class="inversion-list" id="inversion-list"></ol>
       </section>
+      <section class="spread-history" aria-labelledby="spread-history-heading">
+        <div class="detail-heading"><p class="eyebrow">Context</p><h2 id="spread-history-heading">10Y minus 3M, across the record</h2></div>
+        <div class="spread-chart" id="spread-chart" aria-label="Historical 10-year minus 3-month Treasury spread"></div>
+      </section>
     </section>
   </main>`;
 
@@ -69,6 +73,7 @@ const copyReadout = document.querySelector<HTMLElement>("#selected-copy")!;
 const track = document.querySelector<HTMLDivElement>("#recession-track")!;
 const yieldGrid = document.querySelector<HTMLDListElement>("#yield-grid")!;
 const inversionList = document.querySelector<HTMLOListElement>("#inversion-list")!;
+const spreadChart = document.querySelector<HTMLDivElement>("#spread-chart")!;
 
 slider.max = String(observations.length - 1);
 slider.value = String(observations.length - 1);
