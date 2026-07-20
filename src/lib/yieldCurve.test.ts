@@ -1,6 +1,8 @@
 import { describe, expect, it } from "vitest";
 import {
   formatObservationMonth,
+  formatTenor,
+  formatYield,
   clampObservationIndex,
   inversionSpans,
   isInverted,
@@ -59,6 +61,21 @@ describe("spread", () => {
 
   it("is null when a tenor is missing", () => {
     expect(spread(obs("1972-01-01", null, 6.0))).toBeNull();
+  });
+});
+
+describe("point-in-time formatting", () => {
+  it("formats finite yields and keeps missing or malformed values explicit", () => {
+    expect(formatYield(4.125)).toBe("4.13%");
+    expect(formatYield(null)).toBe("—");
+    expect(formatYield(Number.NaN)).toBe("—");
+  });
+
+  it("uses compact month and year labels for every tenor boundary", () => {
+    expect(formatTenor(1)).toBe("1M");
+    expect(formatTenor(6)).toBe("6M");
+    expect(formatTenor(12)).toBe("1Y");
+    expect(formatTenor(360)).toBe("30Y");
   });
 });
 
