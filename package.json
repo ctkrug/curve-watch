@@ -12,6 +12,7 @@
     "dev": "vite",
     "build": "tsc --noEmit && vite build",
     "preview": "vite preview",
+    "bake:data": "node scripts/bake-yield-data.mjs",
     "test": "vitest run",
     "lint": "tsc --noEmit",
     "format": "prettier --write ."
