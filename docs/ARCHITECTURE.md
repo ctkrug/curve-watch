@@ -5,11 +5,12 @@ bundle and does not make runtime network requests.
 
 ## Key modules
 
-- `src/main.ts` builds the single-page experience: Observable Plot curve rendering,
-  range input, playback, live readout, and recession-band reveal.
+- `src/main.ts` builds the single-page experience: Observable Plot curve and spread
+  rendering, range input, playback, live tenor readout, generated inversion history,
+  and recession-band reveal.
 - `src/lib/yieldCurve.ts` contains the domain rules for inversions, spreads, timeline
-  bounds, and reader-facing dates. Its unit tests cover normal, missing, and boundary
-  states.
+  bounds, reader-facing yield labels, and inversion-to-recession annotations. Its unit
+  tests cover normal, missing, malformed, and boundary states.
 - `src/data/treasury-yield-curves.json` is the baked monthly Treasury dataset.
   `scripts/bake-yield-data.mjs` refreshes it from public FRED daily series.
 - `src/data/recessions.ts` contains the NBER recession month periods used by the
@@ -19,8 +20,10 @@ bundle and does not make runtime network requests.
 ## Data flow
 
 The selected range index resolves to one `YieldObservation`. The app derives inversion
-and 10Y–3M spread from that observation, redraws the curve, then filters recession
-periods whose start dates have been reached for the timeline overlay.
+and 10Y–3M spread from that observation, redraws the curve and selected mini-chart
+marker, rebuilds the exact-tenor detail, then filters recession periods whose start
+dates have been reached for the timeline overlay. The inversion list is built once
+from the full history and jumps back into this same update path.
 
 ## Local development
 
