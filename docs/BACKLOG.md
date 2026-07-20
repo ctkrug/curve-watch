@@ -14,7 +14,7 @@ are meant to be concretely verifiable by a later BUILD/QA run, not vibes.
   - The curve line tweens between months rather than snapping instantly between
     shapes (visually confirmed in QA: no single-frame teleport of the line).
 
-- [ ] **2. Load and bake the full historical Treasury yield curve dataset**
+- [x] **2. Load and bake the full historical Treasury yield curve dataset**
   - The static dataset covers every tracked tenor from its own earliest available
     start date through the most recently published month, not just a sample window.
   - Data ships as a single static file bundled at build time — no runtime network
@@ -22,25 +22,25 @@ are meant to be concretely verifiable by a later BUILD/QA run, not vibes.
   - Tenor/date combinations with no published rate (e.g. 20Y before 1993) are
     represented as `null`, never as `0` or a dropped key.
 
-- [ ] **3. Automatic inversion detection drives curve color and badge state**
+- [x] **3. Automatic inversion detection drives curve color and badge state**
   - `isInverted()` correctly flags the known historical inversions (spot-checked
     against 2000, 2006–07, 2019, and 2022–23) against the real dataset.
   - The curve stroke color and the "INVERTED"/"NORMAL" badge update within the same
     frame the slider crosses an inversion boundary, not on a delay.
 
-- [ ] **4. Recession-lag shading overlays the timeline**
+- [x] **4. Recession-lag shading overlays the timeline**
   - Every real NBER recession start/end date renders as a shaded band on the
     timeline scrubber at its historically correct position.
   - A recession band only becomes visible once the slider's current date reaches or
     passes that recession's start date (no shading revealed early).
 
-- [ ] **5. Play/pause auto-scrub through the full 60-year history**
+- [x] **5. Play/pause auto-scrub through the full 60-year history**
   - Pressing play advances the slider automatically at a fixed, readable pace;
     pressing pause, or manually dragging, stops auto-play immediately.
   - Auto-play stops cleanly at the latest available month without erroring or
     looping unexpectedly.
 
-- [ ] **6. Design polish pass — Epic 1**
+- [x] **6. Design polish pass — Epic 1**
   - Chart, slider, badge, and play control match `docs/DESIGN.md` tokens (colors,
     fonts, spacing) with no default/unstyled browser control appearance remaining.
   - The core view composes with no horizontal scroll and no dead empty margins at
@@ -73,13 +73,13 @@ are meant to be concretely verifiable by a later BUILD/QA run, not vibes.
 
 ## Epic 3 — Ship quality: accessibility, responsiveness, deploy readiness
 
-- [ ] **11. Keyboard and touch control of the slider**
+- [x] **11. Keyboard and touch control of the slider**
   - The slider is operable via arrow keys (single-month step, with a larger step —
     e.g. Shift+arrow — for one year) without a mouse.
   - The slider is draggable via touch at a 390px viewport width with a hit target
     at least 44px tall.
 
-- [ ] **12. Accessibility pass — focus, live region, reduced motion**
+- [x] **12. Accessibility pass — focus, live region, reduced motion**
   - Every interactive control has a visible focus-visible state and a sane tab
     order.
   - The point-in-time readout is wrapped in an `aria-live` region so screen readers
