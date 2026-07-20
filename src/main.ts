@@ -75,6 +75,22 @@ slider.value = String(observations.length - 1);
 document.querySelector("#timeline-start")!.textContent = formatObservationMonth(observations[0].date);
 document.querySelector("#timeline-end")!.textContent = formatObservationMonth(observations.at(-1)!.date);
 
+for (const annotation of inversionAnnotations(observations, recessions)) {
+  const item = document.createElement("li");
+  const button = document.createElement("button");
+  const recession = annotation.recession
+    ? `Recession began ${formatObservationMonth(annotation.recession.start)}.`
+    : "No later recession in the available record.";
+  button.type = "button";
+  button.innerHTML = `<strong>${formatObservationMonth(annotation.start)}–${formatObservationMonth(annotation.end)}</strong><span>${recession}</span>`;
+  button.addEventListener("click", () => {
+    const target = observations.findIndex((observation) => observation.date === annotation.start);
+    if (target >= 0) update(target);
+  });
+  item.append(button);
+  inversionList.append(item);
+}
+
 let index = observations.length - 1;
 let playback: number | undefined;
 
