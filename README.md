@@ -56,10 +56,12 @@ npm install
 npm run dev      # local dev server
 npm test         # run the test suite
 npm run build    # produce the static site in dist/
+npm run verify:static # serve dist/ from /curve-watch/ and check its assets
 ```
 
 The Vite build uses a relative base path, so `dist/` can be served from a subpath such
-as `apps.charliekrug.com/curve-watch/`.
+as `apps.charliekrug.com/curve-watch/`. Run `npm run build && npm run verify:static`
+before publishing to confirm the bundled CSS and JavaScript resolve from that subpath.
 
 ## License
 
