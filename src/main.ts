@@ -140,6 +140,32 @@ function render(): void {
     return term;
   }));
   track.replaceChildren(...visibleRecessions(recessions, observation.date).map((period) => recessionBand(period)));
+  renderSpreadHistory(observation);
+}
+
+function renderSpreadHistory(selected: YieldObservation): void {
+  const points = observations.flatMap((observation) => {
+    const value = spread(observation);
+    return value == null ? [] : [{ date: new Date(`${observation.date}T00:00:00Z`), value }];
+  });
+  const selectedSpread = spread(selected);
+  const width = Math.max(280, spreadChart.clientWidth);
+  const plot = Plot.plot({
+    width,
+    height: 170,
+    marginTop: 12,
+    marginRight: 18,
+    marginBottom: 28,
+    marginLeft: 42,
+    x: { type: "utc", label: null, tickFormat: "%Y" },
+    y: { grid: true, label: null, tickFormat: (value) => `${value}%` },
+    marks: [
+      Plot.ruleY([0], { stroke: "#b23a2f", strokeWidth: 1.5, strokeDasharray: "3,3" }),
+      Plot.line(points, { x: "date", y: "value", stroke: "#2f5d8a", strokeWidth: 1.8 }),
+      ...(selectedSpread == null ? [] : [Plot.dot([{ date: new Date(`${selected.date}T00:00:00Z`), value: selectedSpread }], { x: "date", y: "value", fill: "#fffdf7", stroke: selectedSpread < 0 ? "#b23a2f" : "#2f5d8a", strokeWidth: 2.5, r: 5 })]),
+    ],
+  });
+  spreadChart.replaceChildren(plot);
 }
 
 function recessionBand(period: RecessionPeriod): HTMLSpanElement {
