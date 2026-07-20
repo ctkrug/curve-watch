@@ -26,8 +26,12 @@ scrubbable "oh, I get it" moment, not a Bloomberg terminal replacement.
 - **Recession timeline shading** — NBER recession bands reveal only as the selected
   month reaches their historical start.
 - **Play/pause auto-scrub** through the full 60-year history as a guided tour.
-- **Point-in-time spread readout** — the selected month and 10Y-minus-3M spread stay
-  visible while you explore.
+- **Point-in-time tenor readout** — every maturity reports its exact selected-month
+  yield, with unavailable historical series shown explicitly.
+- **Generated inversion record** — jump directly to every detected inversion and see
+  the NBER recession that followed it, if one appears in the available record.
+- **Persistent spread context** — a full-history 10Y-minus-3M mini-chart keeps the
+  selected month and the zero crossing in view.
 
 The Treasury data is baked into the application from public FRED constant-maturity
 series, so opening Curve Watch never depends on a market-data request. To deliberately
