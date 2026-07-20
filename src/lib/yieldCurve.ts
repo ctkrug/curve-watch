@@ -16,6 +16,19 @@ export interface RecessionPeriod {
   end: string;
 }
 
+/** Formats a monthly observation date for the reader-facing timeline. */
+export function formatObservationMonth(date: string): string {
+  const parsed = new Date(`${date}T00:00:00Z`);
+  if (Number.isNaN(parsed.valueOf()) || !/^\d{4}-\d{2}-\d{2}$/.test(date)) {
+    throw new Error(`Invalid observation date: ${date}`);
+  }
+  return new Intl.DateTimeFormat("en-US", {
+    month: "short",
+    year: "numeric",
+    timeZone: "UTC",
+  }).format(parsed);
+}
+
 /**
  * An inversion is defined as the short end (3M) yielding more than the long end (10Y) —
  * the spread the NY Fed's recession-probability model is built on.
