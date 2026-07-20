@@ -93,7 +93,7 @@ are meant to be concretely verifiable by a later BUILD/QA run, not vibes.
   - The wordmark's draw-in animation plays once on load and is skipped entirely
     when `prefers-reduced-motion` is set.
 
-- [ ] **14. Static deploy readiness for subpath hosting**
+- [x] **14. Static deploy readiness for subpath hosting**
   - `npm run build` produces a single self-contained directory using only relative
     asset paths, verified by serving the build output from a non-root subpath
     locally and confirming every asset still loads.
