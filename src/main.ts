@@ -102,6 +102,15 @@ function render(): void {
   const currentSpread = spread(observation);
   spreadReadout.textContent = currentSpread == null ? "—" : `${currentSpread.toFixed(2)} pp`;
   copyReadout.textContent = currentSpread == null ? "10Y–3M unavailable" : "10Y minus 3M";
+  yieldGrid.replaceChildren(...TENORS_MONTHS.map((months) => {
+    const term = document.createElement("div");
+    const label = document.createElement("dt");
+    const value = document.createElement("dd");
+    label.textContent = formatTenor(months);
+    value.textContent = formatYield(observation.yields[months]);
+    term.append(label, value);
+    return term;
+  }));
   track.replaceChildren(...visibleRecessions(recessions, observation.date).map((period) => recessionBand(period)));
 }
 
