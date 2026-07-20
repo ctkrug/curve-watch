@@ -87,7 +87,7 @@ are meant to be concretely verifiable by a later BUILD/QA run, not vibes.
   - `prefers-reduced-motion` disables curve tweening and the wordmark draw-in
     animation while all functionality still works.
 
-- [ ] **13. Favicon and animated wordmark signature detail**
+- [x] **13. Favicon and animated wordmark signature detail**
   - An inline SVG favicon (bent-curve monogram, not a default globe/browser icon)
     is wired up and visible in the browser tab.
   - The wordmark's draw-in animation plays once on load and is skipped entirely
