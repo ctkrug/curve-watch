@@ -1,6 +1,7 @@
 import * as Plot from "@observablehq/plot";
 import { RECESSIONS } from "./data/recessions";
 import history from "./data/treasury-yield-curves.json";
+import { unavailableStateMarkup } from "./lib/startup";
 import {
   TENORS_MONTHS,
   clampObservationIndex,
@@ -19,10 +20,11 @@ const observations = history.observations as unknown as YieldObservation[];
 const recessions: readonly RecessionPeriod[] = RECESSIONS;
 const app = document.querySelector<HTMLDivElement>("#app");
 
-if (!app || observations.length === 0) {
-  throw new Error("Curve Watch could not start because its historical data is unavailable.");
-}
+if (!app) throw new Error("Curve Watch could not find its application root.");
 
+if (observations.length === 0) {
+  app.innerHTML = unavailableStateMarkup("The bundled Treasury history is unavailable. Please reload the page.");
+} else {
 app.innerHTML = `
   <main class="page-shell">
     <header class="masthead">
@@ -204,3 +206,4 @@ playButton.addEventListener("click", () => {
 });
 new ResizeObserver(() => render()).observe(chart);
 render();
+}
