@@ -17,17 +17,21 @@ Static yield-curve charts and data tables assume the reader already understands 
 an inversion is. Curve Watch is built for the other 95% of people: a 20-second,
 scrubbable "oh, I get it" moment, not a Bloomberg terminal replacement.
 
-## Planned features
+## What you can do
 
-- **Scrubbable year slider** spanning 1970–present, animating the full Treasury yield
-  curve (3M through 30Y) as it evolves month by month.
+- **Scrub monthly curve history** from 1962 to the latest baked observation, with an
+  animated yield curve that responds immediately to the range control.
 - **Automatic inversion detection** — the curve visibly bends when the short end rises
   above the long end, with an on-chart indicator while inverted.
-- **Recession-lag shading** — a shaded band appears 6–18 months after each detected
-  inversion, aligned to official NBER recession dates.
+- **Recession timeline shading** — NBER recession bands reveal only as the selected
+  month reaches their historical start.
 - **Play/pause auto-scrub** through the full 60-year history as a guided tour.
-- **Point-in-time readout** — hovering or scrubbing to any month shows the exact yields
-  across every maturity for that date.
+- **Point-in-time spread readout** — the selected month and 10Y-minus-3M spread stay
+  visible while you explore.
+
+The Treasury data is baked into the application from public FRED constant-maturity
+series, so opening Curve Watch never depends on a market-data request. To deliberately
+refresh this snapshot, run `npm run bake:data` and commit the resulting JSON file.
 
 ## Stack
 
@@ -49,6 +53,9 @@ npm run dev      # local dev server
 npm test         # run the test suite
 npm run build    # produce the static site in dist/
 ```
+
+The Vite build uses a relative base path, so `dist/` can be served from a subpath such
+as `apps.charliekrug.com/curve-watch/`.
 
 ## License
 
