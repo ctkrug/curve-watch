@@ -7,6 +7,7 @@ import {
   formatTenor,
   formatObservationMonth,
   formatYield,
+  inversionAnnotations,
   isInverted,
   spread,
   type RecessionPeriod,
@@ -50,6 +51,11 @@ app.innerHTML = `
         <div class="detail-heading"><p class="eyebrow">Point in time</p><h2 id="yield-detail-heading">Every maturity, that month</h2></div>
         <dl class="yield-grid" id="yield-grid" aria-live="polite" aria-label="Selected Treasury yields"></dl>
       </section>
+      <section class="history-notes" aria-labelledby="history-notes-heading">
+        <div class="detail-heading"><p class="eyebrow">The record</p><h2 id="history-notes-heading">When the curve warned</h2></div>
+        <p>Each period is detected from the 3-month and 10-year rates. Select one to revisit its first inverted month.</p>
+        <ol class="inversion-list" id="inversion-list"></ol>
+      </section>
     </section>
   </main>`;
 
@@ -62,6 +68,7 @@ const spreadReadout = document.querySelector<HTMLElement>("#selected-spread")!;
 const copyReadout = document.querySelector<HTMLElement>("#selected-copy")!;
 const track = document.querySelector<HTMLDivElement>("#recession-track")!;
 const yieldGrid = document.querySelector<HTMLDListElement>("#yield-grid")!;
+const inversionList = document.querySelector<HTMLOListElement>("#inversion-list")!;
 
 slider.max = String(observations.length - 1);
 slider.value = String(observations.length - 1);
