@@ -16,6 +16,9 @@ bundle and does not make runtime network requests.
 - `src/data/recessions.ts` contains the NBER recession month periods used by the
   timeline.
 - `src/style.css` implements the editorial serif design system and responsive layout.
+- `src/lib/staticDeploy.ts` holds the pure subpath-asset validation used by tests.
+- `scripts/verify-static-build.mjs` serves `dist/` below `/curve-watch/` and requests
+  the built document assets as a deployment smoke check.
 
 ## Data flow
 
@@ -28,5 +31,6 @@ from the full history and jumps back into this same update path.
 ## Local development
 
 Run `npm run dev` for Vite development, `npm test` for Vitest, and `npm run build` to
-type-check and produce the static `dist/` directory. Run `npm run bake:data` only when
-intentionally refreshing the bundled data snapshot.
+type-check and produce the static `dist/` directory. Run `npm run verify:static` after
+a build to smoke-test the production bundle at its subpath. Run `npm run bake:data`
+only when intentionally refreshing the bundled data snapshot.
