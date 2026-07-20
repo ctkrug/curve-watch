@@ -16,6 +16,12 @@ export interface RecessionPeriod {
   end: string;
 }
 
+export interface InversionAnnotation {
+  start: string;
+  end: string;
+  recession: RecessionPeriod | null;
+}
+
 /** Formats a monthly observation date for the reader-facing timeline. */
 export function formatObservationMonth(date: string): string {
   const parsed = new Date(`${date}T00:00:00Z`);
@@ -77,6 +83,17 @@ export function inversionSpans(observations: YieldObservation[]): RecessionPerio
     spans.push({ start: openStart, end: observations[observations.length - 1].date });
   }
   return spans;
+}
+
+/** Pairs each detected inversion with the next recession, if the record contains one. */
+export function inversionAnnotations(
+  observations: YieldObservation[],
+  recessions: readonly RecessionPeriod[],
+): InversionAnnotation[] {
+  return inversionSpans(observations).map((span) => ({
+    ...span,
+    recession: recessions.find((recession) => recession.start >= span.end) ?? null,
+  }));
 }
 
 /** Returns recession periods whose starting month has been reached by the reader. */
