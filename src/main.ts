@@ -4,7 +4,9 @@ import history from "./data/treasury-yield-curves.json";
 import {
   TENORS_MONTHS,
   clampObservationIndex,
+  formatTenor,
   formatObservationMonth,
+  formatYield,
   isInverted,
   spread,
   type RecessionPeriod,
@@ -44,6 +46,10 @@ app.innerHTML = `
           <time id="selected-date"></time><strong id="selected-spread"></strong><span id="selected-copy"></span>
         </div>
       </div>
+      <section class="yield-detail" aria-labelledby="yield-detail-heading">
+        <div class="detail-heading"><p class="eyebrow">Point in time</p><h2 id="yield-detail-heading">Every maturity, that month</h2></div>
+        <dl class="yield-grid" id="yield-grid" aria-live="polite" aria-label="Selected Treasury yields"></dl>
+      </section>
     </section>
   </main>`;
 
@@ -55,6 +61,7 @@ const dateReadout = document.querySelector<HTMLElement>("#selected-date")!;
 const spreadReadout = document.querySelector<HTMLElement>("#selected-spread")!;
 const copyReadout = document.querySelector<HTMLElement>("#selected-copy")!;
 const track = document.querySelector<HTMLDivElement>("#recession-track")!;
+const yieldGrid = document.querySelector<HTMLDListElement>("#yield-grid")!;
 
 slider.max = String(observations.length - 1);
 slider.value = String(observations.length - 1);
