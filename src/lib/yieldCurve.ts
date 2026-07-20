@@ -66,3 +66,17 @@ export function inversionSpans(observations: YieldObservation[]): RecessionPerio
   }
   return spans;
 }
+
+/** Returns recession periods whose starting month has been reached by the reader. */
+export function visibleRecessions(
+  recessions: readonly RecessionPeriod[],
+  currentDate: string,
+): RecessionPeriod[] {
+  return recessions.filter((recession) => recession.start <= currentDate);
+}
+
+/** Keeps a timeline index inside the available data range. */
+export function clampObservationIndex(index: number, observations: readonly YieldObservation[]): number {
+  if (observations.length === 0) return 0;
+  return Math.max(0, Math.min(observations.length - 1, Math.round(index)));
+}
