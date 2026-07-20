@@ -47,6 +47,9 @@ h2 { margin:0; font:600 1.3rem/1.1 "Source Serif 4",Georgia,serif; letter-spacin
 .inversion-list button:hover { border-color:var(--accent-inverted); box-shadow:0 5px 12px rgb(178 58 47 / .12); transform:translateY(-2px); }
 .inversion-list button:active { transform:translateY(1px); }
 .inversion-list button:focus-visible { outline:3px solid rgb(47 93 138 / .4); outline-offset:2px; }
+.spread-history { margin-top:32px; padding-top:24px; border-top:1px solid rgb(35 31 26 / .12); }
+.spread-chart { min-height:170px; margin-top:16px; padding:8px 0; border-block:1px solid rgb(35 31 26 / .1); background:linear-gradient(90deg,transparent,var(--surface-2) 50%,transparent); }
+.spread-chart svg { display:block; max-width:100%; font-family:Inter,system-ui,sans-serif; }
 @keyframes draw-curve { from { stroke-dashoffset:220; } to { stroke-dashoffset:0; } } @keyframes badge-pop { 50% { transform:scale(1.05); } } @keyframes band-in { from { opacity:0; } to { opacity:1; } }
 @media (max-width:800px) { .yield-grid { grid-template-columns:repeat(6,minmax(0,1fr)); } .inversion-list { grid-template-columns:repeat(2,minmax(0,1fr)); } }
 @media (max-width:640px) { .page-shell { padding:24px 16px 32px; gap:24px; align-content:start; } .masthead { display:block; } .masthead p { margin-top:20px; } .experience { margin-inline:-4px; padding:20px 16px; } .chart-heading { align-items:flex-start; } .state-badge { min-width:auto; } .chart-frame { margin-inline:-4px; } .control-row { grid-template-columns:48px 1fr; } .timeline-hint { display:none; } .readout { grid-column:2; } .yield-grid { grid-template-columns:repeat(4,minmax(0,1fr)); } .inversion-list { grid-template-columns:1fr; } }
