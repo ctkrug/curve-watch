@@ -78,6 +78,10 @@ const track = document.querySelector<HTMLDivElement>("#recession-track")!;
 const yieldGrid = document.querySelector<HTMLDListElement>("#yield-grid")!;
 const inversionList = document.querySelector<HTMLOListElement>("#inversion-list")!;
 const spreadChart = document.querySelector<HTMLDivElement>("#spread-chart")!;
+const spreadPoints = observations.flatMap((observation) => {
+  const value = spread(observation);
+  return value == null ? [] : [{ date: new Date(`${observation.date}T00:00:00Z`), value }];
+});
 
 slider.max = String(observations.length - 1);
 slider.value = String(observations.length - 1);
@@ -179,10 +183,6 @@ function animateCurveTo(targetPoints: CurvePoint[], inverted: boolean): void {
 }
 
 function renderSpreadHistory(selected: YieldObservation): void {
-  const points = observations.flatMap((observation) => {
-    const value = spread(observation);
-    return value == null ? [] : [{ date: new Date(`${observation.date}T00:00:00Z`), value }];
-  });
   const selectedSpread = spread(selected);
   const width = Math.max(280, spreadChart.clientWidth);
   const plot = Plot.plot({
@@ -196,7 +196,7 @@ function renderSpreadHistory(selected: YieldObservation): void {
     y: { grid: true, label: null, tickFormat: (value) => `${value}%` },
     marks: [
       Plot.ruleY([0], { stroke: "#b23a2f", strokeWidth: 1.5, strokeDasharray: "3,3" }),
-      Plot.line(points, { x: "date", y: "value", stroke: "#2f5d8a", strokeWidth: 1.8 }),
+      Plot.line(spreadPoints, { x: "date", y: "value", stroke: "#2f5d8a", strokeWidth: 1.8 }),
       ...(selectedSpread == null ? [] : [Plot.dot([{ date: new Date(`${selected.date}T00:00:00Z`), value: selectedSpread }], { x: "date", y: "value", fill: "#fffdf7", stroke: selectedSpread < 0 ? "#b23a2f" : "#2f5d8a", strokeWidth: 2.5, r: 5 })]),
     ],
   });
