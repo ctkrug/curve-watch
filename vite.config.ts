@@ -7,4 +7,15 @@ export default defineConfig({
   build: {
     outDir: "dist",
   },
+  test: {
+    coverage: {
+      include: ["src/lib/**/*.ts"],
+      thresholds: {
+        lines: 85,
+        functions: 85,
+        branches: 85,
+        statements: 85,
+      },
+    },
+  },
 });
