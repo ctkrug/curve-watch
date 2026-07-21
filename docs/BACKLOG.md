@@ -5,7 +5,7 @@ are meant to be concretely verifiable by a later BUILD/QA run, not vibes.
 
 ## Epic 1 — The scrubbable curve (the wow moment)
 
-- [ ] **1. Scrubbable year/month slider animates the full yield curve in real time**
+- [x] **1. Scrubbable year/month slider animates the full yield curve in real time**
       _(This is the wow moment — build everything else around this landing first.)_
   - Dragging the slider across its full range (earliest data → present) redraws the
     curve on every frame with no visible stutter (sampled at ≥30fps during a drag).
@@ -100,7 +100,7 @@ are meant to be concretely verifiable by a later BUILD/QA run, not vibes.
   - The README's documented build command and output directory match the STATUS
     block's `site_build_dir` / `build_cmd` exactly.
 
-- [ ] **15. Final design self-review and QA pass**
+- [x] **15. Final design self-review and QA pass**
   - Every D2/D3 craft-rule item in the design standard is checked against the live
     built site, with no unresolved anti-generic-ban item remaining.
   - `npm test` and `npm run build` both complete with zero errors immediately
