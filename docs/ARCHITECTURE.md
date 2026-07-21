@@ -6,8 +6,12 @@ bundle and does not make runtime network requests.
 ## Key modules
 
 - `src/main.ts` builds the single-page experience: Observable Plot curve and spread
-  rendering, range input, playback, live tenor readout, generated inversion history,
-  and recession-band reveal.
+  rendering, interruptible curve tweening, range input, playback, live tenor readout,
+  generated inversion history, and recession-band reveal.
+- `src/lib/curveTransition.ts` interpolates matching tenor points for the curve
+  redraw, preserving true values when a historical tenor becomes newly available.
+- `src/lib/historyValidation.ts` checks the baked JSON at the startup boundary so
+  malformed records use the recoverable unavailable-data state instead of rendering.
 - `src/lib/yieldCurve.ts` contains the domain rules for inversions, spreads, timeline
   bounds, reader-facing yield labels, and inversion-to-recession annotations. Its unit
   tests cover normal, missing, malformed, and boundary states.
@@ -24,10 +28,11 @@ bundle and does not make runtime network requests.
 ## Data flow
 
 The selected range index resolves to one `YieldObservation`. The app derives inversion
-and 10Y–3M spread from that observation, redraws the curve and selected mini-chart
-marker, rebuilds the exact-tenor detail, then filters recession periods whose start
-dates have been reached for the timeline overlay. The inversion list is built once
-from the full history and jumps back into this same update path.
+and 10Y–3M spread from that observation, tweening matching tenor points from the last
+displayed curve before it redraws the curve and selected mini-chart marker. It then
+rebuilds the exact-tenor detail and filters recession periods whose start dates have
+been reached for the timeline overlay. The inversion list is built once from the full
+history and jumps back into this same update path.
 
 ## Local development
 
