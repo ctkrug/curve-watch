@@ -150,6 +150,12 @@ describe("clampObservationIndex", () => {
     expect(clampObservationIndex(20, observations)).toBe(1);
   });
 
+  it("recovers to the first month when a control supplies a non-finite value", () => {
+    expect(clampObservationIndex(Number.NaN, observations)).toBe(0);
+    expect(clampObservationIndex(Number.NEGATIVE_INFINITY, observations)).toBe(0);
+    expect(clampObservationIndex(Number.POSITIVE_INFINITY, observations)).toBe(0);
+  });
+
   it("uses zero for an empty timeline", () => {
     expect(clampObservationIndex(3, [])).toBe(0);
   });
