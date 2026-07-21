@@ -40,6 +40,10 @@ describe("isInverted", () => {
     expect(isInverted(obs("2006-07-01", 5.1, 5.0))).toBe(true);
   });
 
+  it("is false when the short and long ends are equal", () => {
+    expect(isInverted(obs("2015-01-01", 2.1, 2.1))).toBe(false);
+  });
+
   it("is false when either tenor is missing", () => {
     expect(isInverted(obs("1972-01-01", null, 6.0))).toBe(false);
   });
