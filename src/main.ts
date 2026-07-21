@@ -1,6 +1,7 @@
 import * as Plot from "@observablehq/plot";
 import { RECESSIONS } from "./data/recessions";
 import history from "./data/treasury-yield-curves.json";
+import { interpolateCurvePoints, type CurvePoint } from "./lib/curveTransition";
 import { hasUsableObservations } from "./lib/historyValidation";
 import { unavailableStateMarkup } from "./lib/startup";
 import {
@@ -101,14 +102,17 @@ for (const annotation of inversionAnnotations(observations, recessions)) {
 
 let index = observations.length - 1;
 let playback: number | undefined;
+let curveAnimation: number | undefined;
+let displayedPoints = curvePoints(observations[index]);
 
-function render(): void {
-  const observation = observations[index];
-  const inverted = isInverted(observation);
-  const points = TENORS_MONTHS.filter((months) => observation.yields[months] != null).map((months) => ({
+function curvePoints(observation: YieldObservation): CurvePoint[] {
+  return TENORS_MONTHS.filter((months) => observation.yields[months] != null).map((months) => ({
     months,
     yield: observation.yields[months]!,
   }));
+}
+
+function renderCurve(points: readonly CurvePoint[], inverted: boolean): void {
   const width = Math.max(280, chart.clientWidth);
   const plot = Plot.plot({
     width,
@@ -127,6 +131,20 @@ function render(): void {
   });
   chart.replaceChildren(plot);
   chart.classList.toggle("is-inverted", inverted);
+}
+
+function render(animateCurve = false): void {
+  const observation = observations[index];
+  const inverted = isInverted(observation);
+  const targetPoints = curvePoints(observation);
+  if (animateCurve && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    animateCurveTo(targetPoints, inverted);
+  } else {
+    if (curveAnimation !== undefined) window.cancelAnimationFrame(curveAnimation);
+    curveAnimation = undefined;
+    displayedPoints = targetPoints;
+    renderCurve(displayedPoints, inverted);
+  }
   state.textContent = inverted ? "INVERTED" : "NORMAL";
   state.classList.toggle("is-inverted", inverted);
   dateReadout.textContent = formatObservationMonth(observation.date);
@@ -144,6 +162,20 @@ function render(): void {
   }));
   track.replaceChildren(...visibleRecessions(recessions, observation.date).map((period) => recessionBand(period)));
   renderSpreadHistory(observation);
+}
+
+function animateCurveTo(targetPoints: CurvePoint[], inverted: boolean): void {
+  if (curveAnimation !== undefined) window.cancelAnimationFrame(curveAnimation);
+  const startingPoints = displayedPoints;
+  const startedAt = performance.now();
+  const tick = (now: number) => {
+    const progress = Math.min(1, (now - startedAt) / 180);
+    const eased = 1 - ((1 - progress) ** 3);
+    displayedPoints = interpolateCurvePoints(startingPoints, targetPoints, eased);
+    renderCurve(displayedPoints, inverted);
+    curveAnimation = progress < 1 ? window.requestAnimationFrame(tick) : undefined;
+  };
+  curveAnimation = window.requestAnimationFrame(tick);
 }
 
 function renderSpreadHistory(selected: YieldObservation): void {
@@ -186,7 +218,7 @@ function recessionBand(period: RecessionPeriod): HTMLSpanElement {
 function update(next: number): void {
   index = clampObservationIndex(next, observations);
   slider.value = String(index);
-  render();
+  render(true);
 }
 
 function stopPlayback(): void {
