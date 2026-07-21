@@ -110,6 +110,6 @@ export function visibleRecessions(
 
 /** Keeps a timeline index inside the available data range. */
 export function clampObservationIndex(index: number, observations: readonly YieldObservation[]): number {
-  if (observations.length === 0) return 0;
+  if (observations.length === 0 || !Number.isFinite(index)) return 0;
   return Math.max(0, Math.min(observations.length - 1, Math.round(index)));
 }
