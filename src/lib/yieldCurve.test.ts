@@ -53,6 +53,10 @@ describe("formatObservationMonth", () => {
   it("rejects malformed dates instead of presenting a misleading label", () => {
     expect(() => formatObservationMonth("June 2023")).toThrow("Invalid observation date");
   });
+
+  it("rejects impossible calendar dates instead of rolling them into another month", () => {
+    expect(() => formatObservationMonth("2023-02-30")).toThrow("Invalid observation date");
+  });
 });
 
 describe("spread", () => {
